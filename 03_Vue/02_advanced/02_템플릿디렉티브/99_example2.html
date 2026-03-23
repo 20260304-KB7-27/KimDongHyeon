@@ -36,7 +36,7 @@
           <div class="post-content" v-if="openedNo === post.no">
             <h1>{{post.title}}</h1>
             <div class="post-item">{{post.content}}</div>
-            <button>닫기</button>
+            <button @click="closePost">닫기</button>
           </div>
         </li>
       </ul>
@@ -49,6 +49,10 @@
         setup() {
           const openedNo = ref(null);
           const toggle = (no) => {
+            openedNo.value = openedNo.value === no ? null : no;
+          };
+
+          const closePost = (no) => {
             openedNo.value = openedNo.value === no ? null : no;
           };
 
@@ -121,6 +125,7 @@
             posts,
             openedNo,
             toggle,
+            closePost,
           };
         },
       }).mount('#app');
