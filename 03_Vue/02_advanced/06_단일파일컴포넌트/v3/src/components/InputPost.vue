@@ -10,6 +10,7 @@ import { ref } from 'vue';
 const postTitle = ref('');
 const postContent = ref('');
 
+//-----emit 함수----
 const emit = defineEmits(['add']);
 
 const addPost = () => {

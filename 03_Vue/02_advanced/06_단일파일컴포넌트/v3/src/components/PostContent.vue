@@ -7,6 +7,7 @@
 </template>
 
 <script setup>
+//-----emit 함수----
 const emit = defineEmits(['close', 'delete', 'fix']);
 
 const closePost = () => {
@@ -24,6 +25,7 @@ const fixPost = () => {
   emit('fix');
 };
 
+//-----porps 선언------
 const props = defineProps({
   postContent: Object,
 });

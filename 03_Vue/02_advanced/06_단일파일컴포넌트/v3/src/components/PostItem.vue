@@ -52,6 +52,7 @@ const fixPost = () => {
   fixing.value = !fixing.value;
 };
 
+//-----emit 함수----
 const emit = defineEmits('delete', 'fix');
 
 const deletePost = (no) => {
@@ -68,6 +69,7 @@ const fixSave = (data, no) => {
   fixing.value = false;
 };
 
+//-----porps 선언------
 const props = defineProps({
   post: Object,
 });
