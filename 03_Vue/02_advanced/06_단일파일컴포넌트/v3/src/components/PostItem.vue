@@ -17,35 +17,31 @@
     <br />
 
     <div class="post-content" v-if="openedNo === post.no && post.no !== fixNo">
-      <h1>{{ post.title }}</h1>
-      <div class="post-item">{{ post.content }}</div>
-      <button @click="fixPost(post)">수정</button>
-      <button @click="deletePost(post.no)">삭제</button>
-      <button @click="closePost(post.no)">닫기</button>
+      <PostContent
+        :postContent="post"
+        @close="closePost"
+        @delete="deletePost"
+        @fix="fixPost"
+      ></PostContent>
     </div>
 
     <div class="post-content" v-if="fixNo === post.no && openedNo === post.no">
-      <input type="text" class="fixTitle" v-model.trim="fixPostTitle" />
-      <textarea
-        name="content"
-        class="fixContnet"
-        v-model.trim="fixPostContent"
-      ></textarea
-      ><br />
-      <button @click="fixSave(post.no)">저장</button>
-      <button @click="cancelFix">취소</button>
+      <PostFixContent
+        :fixingPost="post"
+        @cancel-fix="cancelFix"
+        @save-fix="fixSave"
+      ></PostFixContent>
     </div>
   </li>
 </template>
 
 <script setup>
 import { ref } from 'vue';
+import PostContent from './PostContent.vue';
+import PostFixContent from './PostFixContent.vue';
 
 const openedNo = ref(null);
 const fixNo = ref(null);
-
-const fixPostContent = ref('');
-const fixPostTitle = ref('');
 
 const toggle = (no) => {
   openedNo.value = openedNo.value === no ? null : no;
@@ -57,9 +53,6 @@ const closePost = (no) => {
 
 const fixPost = (post) => {
   fixNo.value = post.no;
-
-  fixPostContent.value = post.content;
-  fixPostTitle.value = post.title;
 };
 
 const cancelFix = () => {
@@ -69,17 +62,14 @@ const cancelFix = () => {
 const emit = defineEmits('delete', 'fix');
 
 const deletePost = (no) => {
-  let result = confirm('정말로 삭제하시겠습니까?');
-
-  if (result === true) emit('delete', no);
-  else return;
+  emit('delete', no);
 };
 
-const fixSave = (no) => {
+const fixSave = (post) => {
   emit('fix', {
-    no: no,
-    content: fixPostContent.value,
-    title: fixPostTitle.value,
+    no: post.no,
+    content: post.content,
+    title: post.title,
   });
 
   fixNo.value = null;
