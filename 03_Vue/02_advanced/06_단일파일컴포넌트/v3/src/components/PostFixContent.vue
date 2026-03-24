@@ -11,7 +11,12 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from 'vue';
+import { ref } from 'vue';
+
+//-----porps 선언------
+const props = defineProps({
+  fixingPost: Object,
+});
 
 const fixPostTitle = ref(props.fixingPost?.title?.trim() || '');
 const fixPostContent = ref(props.fixingPost?.content?.trim() || '');
@@ -29,11 +34,6 @@ const fixSave = () => {
     title: fixPostTitle.value,
   });
 };
-
-//-----porps 선언------
-const props = defineProps({
-  fixingPost: Object,
-});
 </script>
 
 <style lang="scss" scoped></style>

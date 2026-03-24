@@ -41,6 +41,12 @@ import { ref } from 'vue';
 import PostContent from './PostContent.vue';
 import PostFixContent from './PostFixContent.vue';
 
+//-----porps 선언------
+const props = defineProps({
+  post: Object,
+});
+
+//----상태관리----
 const opened = ref(false);
 const fixing = ref(false);
 
@@ -68,11 +74,6 @@ const fixSave = (data, no) => {
 
   fixing.value = false;
 };
-
-//-----porps 선언------
-const props = defineProps({
-  post: Object,
-});
 </script>
 
 <style lang="scss" scoped></style>

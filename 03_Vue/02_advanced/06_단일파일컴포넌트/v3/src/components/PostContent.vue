@@ -7,6 +7,11 @@
 </template>
 
 <script setup>
+//-----porps 선언------
+const props = defineProps({
+  postContent: Object,
+});
+
 //-----emit 함수----
 const emit = defineEmits(['close', 'delete', 'fix']);
 
@@ -24,11 +29,6 @@ const deletePost = () => {
 const fixPost = () => {
   emit('fix');
 };
-
-//-----porps 선언------
-const props = defineProps({
-  postContent: Object,
-});
 </script>
 
 <style lang="scss" scoped></style>
