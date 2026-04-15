@@ -7,12 +7,15 @@
     <button @click="addTodoHandler">추가</button>
     <hr />
     <ul>
-      <li v-for="todoItem in todoList">
-        <span style="cursor: pointer" @click="toggleDone(todoItem.id)">
+      <li v-for="todoItem in todoListStore.todoList">
+        <span
+          style="cursor: pointer"
+          @click="todoListStore.toggleDone(todoItem.id)"
+        >
           {{ todoItem.todo }} {{ todoItem.done ? '(완료)' : '' }}
         </span>
         &nbsp;&nbsp;&nbsp ;
-        <button @click="deleteTodo(todoItem.id)">삭제</button>
+        <button @click="todoListStore.deleteTodo(todoItem.id)">삭제</button>
       </li>
     </ul>
     <div>완료된 할일 수 : {{ doneCount }}</div>
@@ -23,13 +26,13 @@ import { useTodoListStore } from '@/stores/todoList.js';
 import { ref, computed } from 'vue';
 const todo = ref('');
 const todoListStore = useTodoListStore();
-const { todoList, addTodo, deleteTodo, toggleDone } = todoListStore;
+//const { todoList, addTodo, deleteTodo, toggleDone } = todoListStore;
 // todoList는 데이터인데 분해할당으로 받음
 // cuz, computed로 readonly로 만든 참조 데이터기 때문 (반응성 유지)
 
 const doneCount = computed(() => todoListStore.doneCount); // 기본 타입에 대해서는 계산된 속성을 다시 작성
 const addTodoHandler = () => {
-  addTodo(todo.value);
+  todoListStore.addTodo(todo.value);
   todo.value = '';
 };
 </script>
