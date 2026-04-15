@@ -8,7 +8,7 @@
 </template>
 
 <script setup>
-import InputName from './components/inputName.vue';
+import InputName from './components/InputName.vue';
 import { ref } from 'vue';
 
 // 1. 자식컴포넌트에서 이벤트 발생 (이벤트 이름 : name-change)
